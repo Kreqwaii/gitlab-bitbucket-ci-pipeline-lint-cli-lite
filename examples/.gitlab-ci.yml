@@ -1,0 +1,21 @@
+image: python:latest
+
+stages:
+  - build
+  - test
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  GITLAB_TOKEN: "glpat-1234567890abcdefghij"
+
+services:
+  - docker:dind
+
+build_job:
+  stage: build
+  script:
+    - curl -fsSL https://example.com/install.sh | sh
+    - echo $CI_COMMIT_MESSAGE
+  artifacts:
+    paths:
+      - dist/
